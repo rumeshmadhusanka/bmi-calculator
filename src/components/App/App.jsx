@@ -65,7 +65,6 @@ const App = () => {
 
   return (
     <Grid container spacing={3}>
-
       <Grid item xs={12} sm={12}>
 
         <Grid item xs={12} sm={12}>
@@ -73,19 +72,21 @@ const App = () => {
             <h1 className='white-text'> BMI Tracker </h1>
           </div>
         </Grid>
-
+        <section></section>
         <Grid item xs={12} sm={12}>
-          <BmiForm change={handleChange} />
+          <div style = {{marginLeft : '34px'}}>
+            <BmiForm change={handleChange} />
+          </div>
+    
         </Grid>
-
       </Grid>
 
       <Grid item xs={12} sm={6}>
         <Chart labelData={data.date} bmiData={data.bmi} />
       </Grid>
-
+      <section></section>
       <Grid item xs={12} sm={6}>
-        <div>
+        <div style = {{marginRight : '20px'}}>
           <div className='row center'>
             <h4 className='white-text'>7 Day Data</h4>
           </div>
@@ -109,21 +110,19 @@ const App = () => {
             )}
           </div>
         </div>
-
+        
+        <Grid container direction="row" justify="center" alignItems="center" >
+          {getData('lastState') !== null ? (
+            <div className='center'>
+              <button className='calculate-btn' onClick={handleUndo}>
+                Undo
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
+        </Grid>
       </Grid>
-
-      <Grid item xs={12} sm={6}>
-        {getData('lastState') !== null ? (
-          <div className='center'>
-            <button className='calculate-btn' onClick={handleUndo}>
-              Undo
-            </button>
-          </div>
-        ) : (
-          ''
-        )}
-      </Grid>
-
     </Grid>
 
   );
