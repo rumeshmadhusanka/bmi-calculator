@@ -10,11 +10,38 @@ const initialValues = {
 
 const BmiForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
+	const [weightError, setWeightError] = useState({error:false, errorMsg:""})
+	const [heightError, setHeightError] = useState({error:false, errorMsg:""})
 
-	const handleChange = e => {
+	const handleChangeWeight = e => {
 		let { value, name } = e.target;
-		if (value > 999) {
-			value = 999;
+		console.log(value)
+		if (value > 999 || value < 1 && value !== "") {
+			setWeightError({error:true, errorMsg: "Enter valid weight between 1 and 500"})
+		}
+		else if(isNaN(parseFloat(value)) && value !== ""){
+			setWeightError({error:true, errorMsg: "Only enter numbers"})
+		}else{
+			setWeightError({error:false, errorMsg: ""})
+		}
+		const date = new Date().toLocaleString().split(',')[0];
+		setState({
+			...state,
+			[name]: value,
+			date
+		});
+	};
+
+	const handleChangeHeight = e => {
+		let { value, name } = e.target;
+		console.log(value)
+		if (value > 999 || value < 1 && value !== "") {
+			setHeightError({error:true, errorMsg: "Enter valid height between 1 and 200"})
+		}
+		else if(isNaN(parseFloat(value)) && value !== ""){
+			setHeightError({error:true, errorMsg: "Only enter numbers"})
+		}else{
+			setHeightError({error:false, errorMsg: ""})
 		}
 		const date = new Date().toLocaleString().split(',')[0];
 		setState({
@@ -37,13 +64,14 @@ const BmiForm = ({ change }) => {
 					<input
 						id="weight"
 						name="weight"
-						type="number"
-						min="1"
-						max="999"
+						// type="number"
+						// min="1"
+						// max="999"
 						placeholder="50"
 						value={state.weight}
-						onChange={handleChange}
+						onChange={handleChangeWeight}
 					/>
+					<p>{weightError.errorMsg}</p>
 				</div>
 
 				<div className="col m6 s12">
@@ -51,13 +79,14 @@ const BmiForm = ({ change }) => {
 					<input
 						id="height"
 						name="height"
-						type="number"
-						min="1"
-						max="999"
+						// type="number"
+						// min="1"
+						// max="999"
 						placeholder="176"
 						value={state.height}
-						onChange={handleChange}
+						onChange={handleChangeHeight}
 					/>
+					<p>{heightError.errorMsg}</p>
 				</div>
 			</div>
 			<div className="center">
