@@ -71,6 +71,7 @@ const App = () => {
               <DatePicker
                   onChange={onChangeDate}
                   value={calendarDate}
+                  maxDate={new Date()}
               />
             </div>
           </div>
