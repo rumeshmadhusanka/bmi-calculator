@@ -3610,6 +3610,13 @@ domutils@^1.5.1, domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
+dot-prop@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-3.0.0.tgz#1b708af094a49c9a0e7dbcad790aba539dac1177"
+  integrity sha1-G3CK8JSknJoOfbyteQq6U52sEXc=
+  dependencies:
+    is-obj "^1.0.0"
+
 dot-prop@^4.1.1:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
@@ -5336,6 +5343,11 @@ ignore@^4.0.6:
 immer@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
+
+immutability-helper@^3.0.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-3.1.1.tgz#2b86b2286ed3b1241c9e23b7b21e0444f52f77b7"
+  integrity sha512-Q0QaXjPjwIju/28TsugCHNEASwoCcJSyJV3uO1sOIQGI0jKgm9f41Lvz0DZj3n46cNCyAZTsEYoY4C2bVRUzyQ==
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -8580,7 +8592,7 @@ prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -8891,6 +8903,24 @@ react-scripts@3.1.1:
   optionalDependencies:
     fsevents "2.0.7"
 
+react-speech-kit@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-speech-kit/-/react-speech-kit-3.0.1.tgz#8bd936adfe064be1c5a07e2992dfdfd772e80d14"
+  integrity sha512-MXNOciISanhmnxpHJkBOev3M3NPDpW1T7nTc/eGw5pO9cXpoUccRxZkmr/IlpTPbPEneDNeTmbwri/YweyctZg==
+
+react-speech-recognition@3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/react-speech-recognition/-/react-speech-recognition-3.8.0.tgz#0b40b6880e46b3aa6244051e8e989c4640eaaa58"
+  integrity sha512-mQ5oVQPt2l95/YKuaB+vGdDCuOKJS/ezwALWgo0w1+/CT3N2jxAdkOzeqvJiBmCLf263sCbkJ/L4fI8R1ij2IA==
+
+react-speech@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-speech/-/react-speech-1.0.2.tgz#e5200c6705e44cd9b4b55b218eb267e85d44f86c"
+  integrity sha512-z/HgICAqmWIwXbQnxVDm0CMgu6MlZzkVtp37F7kd9vPKSJw8Pcv+f2wFy5kOwTO5m5BOD9awnCsBa5J9XovPJA==
+  dependencies:
+    immutability-helper "^3.0.1"
+    react "^16.10.1"
+
 react-test-renderer@^16.0.0-0:
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.11.0.tgz#72574566496462c808ac449b0287a4c0a1a7d8f8"
@@ -8900,6 +8930,13 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.8.6"
     scheduler "^0.17.0"
 
+react-translate-text@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-translate-text/-/react-translate-text-0.3.0.tgz#781b0022103ea8ce3c14f78621fd921adf815c03"
+  integrity sha512-WxX5bYpFjfD5ReQU1zwMnn6vb3Wokyrwq/JvPqNWzLuxFoG89ap9GhtuYbu0uDptkUzks+eSmUQ79kfpcUhHBA==
+  dependencies:
+    prop-types "^15.5.10"
+    translate-text "^0.2.1"
 react-transition-group@^4.4.0:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
@@ -8913,6 +8950,15 @@ react-transition-group@^4.4.0:
 react@16.11.0:
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.11.0.tgz#d294545fe62299ccee83363599bf904e4a07fdbb"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+
+react@^16.10.1:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -10443,6 +10489,13 @@ tr46@^1.0.1:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-1.0.1.tgz#a8b13fd6bfd2489519674ccde55ba3693b706d09"
   dependencies:
     punycode "^2.1.0"
+
+translate-text@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/translate-text/-/translate-text-0.2.1.tgz#266bc5861ac9b79c97c06a54f8df807767311f41"
+  integrity sha512-iFxjF8VH/bh517w/3y6+GU+5p897maCYeG2mybS0xI+dsDW1padoSz+Zg1f+UyV/R6Hb0WBYzCDc+mGIejtd+w==
+  dependencies:
+    dot-prop "^3.0.0"
 
 trim-repeated@^1.0.0:
   version "1.0.0"
