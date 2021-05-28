@@ -8,7 +8,7 @@ const initialValues = {
 	date: ''
 }
 
-const BmiForm = ({ change }) => {
+const BmiForm = ({ change, calendarDate }) => {
 	const [state, setState] = useState(initialValues);
 
 	const handleChange = e => {
@@ -16,7 +16,7 @@ const BmiForm = ({ change }) => {
 		if (value > 999) {
 			value = 999;
 		}
-		const date = new Date().toLocaleString().split(',')[0];
+		const date = calendarDate.toLocaleString().split(',')[0];
 		setState({
 			...state,
 			[name]: value,

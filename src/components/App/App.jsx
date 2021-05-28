@@ -16,7 +16,7 @@ const App = () => {
   const initialState = () => getData('data') || [];
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
-  const [value, onChange] = useState(new Date());
+  const [calendarDate, onChange] = useState(new Date());
 
   useEffect(() => {
     storeData('data', state);
@@ -34,6 +34,11 @@ const App = () => {
     let len = newVal.length;
     if (len > 7) newVal = newVal.slice(1, len);
     setState(newVal);
+  };
+
+  const onChangeDate = date => {
+    onChange(date);
+    console.log(date, calendarDate);
   };
 
   const handleDelete = id => {
@@ -62,16 +67,17 @@ const App = () => {
         <Grid item xs={12} sm={12}>
           <div className='row center'>
             <div>
+              <label>Date</label>
               <DatePicker
-                  onChange={onChange}
-                  value={value}
+                  onChange={onChangeDate}
+                  value={calendarDate}
               />
             </div>
           </div>
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <BmiForm change={handleChange} />
+          <BmiForm change={handleChange} calendarDate={calendarDate} />
         </Grid>
 
       </Grid>
