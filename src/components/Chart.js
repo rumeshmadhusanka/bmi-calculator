@@ -1,7 +1,7 @@
 import React from 'react'
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+// import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { useEffect } from "react";
 
 export default function Chart({ labelData = [], bmiData = [] }) {
@@ -54,7 +54,7 @@ export default function Chart({ labelData = [], bmiData = [] }) {
         chart.scrollbarX = scrollbarX;
 
         createRange(valueAxis, 0, 18.5, am4core.color("#b4dd1e"));
-        createRange(valueAxis, 18.5, 25, am4core.color("#f4fb16"));
+        createRange(valueAxis, 18.5, 25, am4core.color("#3BCC61"));
         createRange(valueAxis, 25, 30, am4core.color("#f6d32b"));
         createRange(valueAxis, 30, 100, am4core.color("#fb7116"));
 
