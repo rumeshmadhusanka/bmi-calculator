@@ -74,7 +74,7 @@ const App = () => {
         </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
-          <div style = {{marginLeft : '34px'}}>
+          <div style = {{margin : '30px'}}>
             <BmiForm change={handleChange} />
           </div>
     
@@ -86,7 +86,7 @@ const App = () => {
       </Grid>
       <section></section>
       <Grid item xs={12} sm={6}>
-        <div style = {{marginRight : '20px'}}>
+        <div style = {{margin : '20px'}}>
           <div className='row center'>
             <h4 className='white-text'>7 Day Data</h4>
           </div>
