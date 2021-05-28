@@ -82,9 +82,6 @@ const App = () => {
         </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
-          <div style = {{margin : '30px'}}>
-            <BmiForm change={handleChange} />
-          </div>
     
           <div className='row center'>
             <div>
@@ -99,7 +96,9 @@ const App = () => {
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <BmiForm change={handleChange} calendarDate={calendarDate} />
+          <div style = {{margin : '30px'}}>
+            <BmiForm change={handleChange} calendarDate={calendarDate} />
+          </div>
         </Grid>
       </Grid>
 
