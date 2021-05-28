@@ -14,13 +14,49 @@ let speechRecognitionOn = false;
 
 const BmiForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
-	const [speechValue, setSpeechValue] = useState('');
+	const [oldTranscript, setOldTranscript] = useState('');
+	const [speechValue, setSpeechValue] = useState("");
 	const { speak,cancel,speaking} = useSpeechSynthesis();
 	const { transcript, resetTranscript } = useSpeechRecognition();
-	const contListen = ()=>{ //continuously listen from mic
+
+	useEffect(()=>{
+		if (transcript===""|| transcript===oldTranscript){
+			return;
+		}
+		if (transcript.includes("off")|| transcript.includes("shut")|| transcript.includes("kill")){
+			SpeechRecognition.abortListening();
+			setOldTranscript("")
+			speechRecognitionOn = false;
+			setSpeechValue("Speech Recognition stopped");
+		}
+		if (transcript.length>100){
+			setOldTranscript("");
+			resetTranscript();
+		}
+		if ((transcript.includes("kilo")|| transcript.includes("kg")) &&
+			(transcript.includes("centi")||transcript.includes("cm") )){
+			setSpeechValue("Found value");
+
+			//todo enter the values to graph
+			resetTranscript();
+		}
+		setOldTranscript(transcript);
+		console.log(transcript);
+	},[transcript])
+
+	useEffect(()=>{
+		if (speaking){
+			cancel()
+		}
+		speak({ text: speechValue })
+	},[speechValue])
+
+	const toggleListen = ()=>{ //continuously listen from mic
 
 		if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-			console.error("Browser not supported. Use Chrome")
+			let txt ="Browser not supported. Use Google Chrome";
+			console.error(txt)
+			setSpeechValue(txt);
 			return null
 		}
 		speechRecognitionOn = ! speechRecognitionOn;
@@ -28,6 +64,7 @@ const BmiForm = ({ change }) => {
 			setSpeechValue("Speech Recognition started");
 			return SpeechRecognition.startListening({ continuous: true,language: 'en-IN' })
 		}else{
+			speechRecognitionOn = false;
 			setSpeechValue("Speech Recognition stopped");
 			SpeechRecognition.stopListening();
 		}
@@ -35,34 +72,6 @@ const BmiForm = ({ change }) => {
 	}
 
 
-	const HiddenPara = ({text})=>{
-		useEffect(()=>{
-			if (text===""|| text===speechValue){
-				return;
-			}
-
-			if (text.includes("off")|| text.includes("shut")|| text.includes("kill")||text.includes("reset")||text.includes("stop")){
-				SpeechRecognition.abortListening();
-				setSpeechValue("Speech Recognition stopped")
-			}
-			setSpeechValue(text.toString());
-			console.log(speechValue);
-		},[speechValue])
-
-		return (<p>transcript: </p>)
-	}
-
-	const SpeakPara = ({textToSpeak})=>{
-		useEffect(()=>{
-			if (speaking){
-				cancel()
-			}
-			speak({ text: textToSpeak })
-		})
-		return (
-			<p>{textToSpeak}</p>
-		)
-	}
 
 	const handleChange = e => {
 		let { value, name } = e.target;
@@ -125,14 +134,10 @@ const BmiForm = ({ change }) => {
 				</button>
 
 				<div>
-					<button onClick={contListen}>Toggle Speech Recognition</button>
+					<button onClick={toggleListen}>Toggle Speech Recognition</button>
 					{/*//todo apply style, move to right upper corner*/}
-					<button onClick={resetTranscript}>Reset</button>
-					{/*//todo this should be hidden*/}
-					<HiddenPara text={transcript}/>
-					{/*//todo this should be hidden*/}
-					<SpeakPara textToSpeak={"Hello"}/>
-
+					<p>{transcript}</p>
+				{/*	Hide the above*/}
 
 				</div>
 			</div>
