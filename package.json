@@ -11,15 +11,16 @@
     "materialize-css": "1.0.0",
     "prop-types": "15.7.2",
     "react": "16.11.0",
+    "react-calendar": "^3.4.0",
     "react-chartjs-2": "2.8.0",
     "react-date-picker": "^8.1.1",
     "react-dom": "16.11.0",
     "react-scripts": "3.1.1",
-    "uuid": "3.3.3",
     "react-speech": "1.0.2",
+    "react-speech-kit": "3.0.1",
     "react-speech-recognition": "3.8.0",
     "react-translate-text": "0.3.0",
-    "react-speech-kit": "3.0.1"
+    "uuid": "3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
