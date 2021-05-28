@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 body {
   background-color: #172b4d;
+  transition: 0.3s all;
 }
 
 input {
@@ -98,4 +101,20 @@ label {
 
 .delete-btn:focus {
   background-color: #e74c3c;
+}
+
+.lightBlue {
+  background-color: #3983d6;
+}
+
+.darkSkyBlue {
+  background-color: #90deb3;
+}
+
+.aquamarine {
+  background-color: #68EDC6;
+}
+
+.electricBlue {
+  background-color: #90F3FF;
 }

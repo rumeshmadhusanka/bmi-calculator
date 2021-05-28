@@ -12,6 +12,24 @@ const App = () => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
 
+  const colors = ['', 'lightBlue', 'darkSkyBlue', 'aquamarine', 'electricBlue']
+  const sections = [...document.getElementsByTagName('section')]
+  
+  window.addEventListener('scroll', function () {
+
+    const scrollFromTop = window.pageYOffset
+  
+    for (let i = 0; sections.length > i; i++) {
+  
+      if (scrollFromTop <= sections[i].offsetTop) {
+        document.body.className = colors[i] 
+        break
+      } 
+  
+    }
+  
+  })
+
   useEffect(() => {
     storeData('data', state);
     const date = state.map(obj => obj.date);
@@ -49,41 +67,50 @@ const App = () => {
       </div>
       <div className='row'>
         <div className='col m12 s12'>
-          <BmiForm change={handleChange} />
-          <Bar labelData={data.date} bmiData={data.bmi} />
-          <div>
-            <div className='row center'>
-              <h4 className='white-text'>7 Day Data</h4>
+          <section>
+            <BmiForm change={handleChange} />
+          </section>
+          <section>
+            <Bar labelData={data.date} bmiData={data.bmi} />
+          </section>
+          <section>
+            <div>
+              <div className='row center'>
+                <h4 className='white-text'>7 Day Data</h4>
+              </div>
+              <div className='data-container row'>
+                {state.length > 0 ? (
+                  <>
+                    {state.map(info => (
+                      <Info
+                        key={info.id}
+                        id={info.id}
+                        weight={info.weight}
+                        height={info.height}
+                        date={info.date}
+                        bmi={info.bmi}
+                        deleteCard={handleDelete}
+                      />
+                    ))}
+                  </>
+                ) : (
+                    <div className='center white-text'>No log found</div>
+                  )}
+              </div>
             </div>
-            <div className='data-container row'>
-              {state.length > 0 ? (
-                <>
-                  {state.map(info => (
-                    <Info
-                      key={info.id}
-                      id={info.id}
-                      weight={info.weight}
-                      height={info.height}
-                      date={info.date}
-                      bmi={info.bmi}
-                      deleteCard={handleDelete}
-                    />
-                  ))}
-                </>
-              ) : (
-                  <div className='center white-text'>No log found</div>
-                )}
-            </div>
-          </div>
-          {getData('lastState') !== null ? (
-            <div className='center'>
-              <button className='calculate-btn' onClick={handleUndo}>
-                Undo
-              </button>
-            </div>
-          ) : (
-              ''
-            )}
+          </section>
+          <section>
+            {getData('lastState') !== null ? (
+              <div className='center'>
+                <button className='calculate-btn' onClick={handleUndo}>
+                  Undo
+                </button>
+              </div>
+            ) : (
+                ''
+              )}
+          </section>
+          
         </div>
       </div>
     </div>
