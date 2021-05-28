@@ -16,7 +16,7 @@ export default function Chart({ labelData = [], bmiData = [] }) {
         for (let i = 0; i < labelData.length; i++) {
             console.log(i, labelData[i])
             const date = labelData[i].split('/')
-            data.push({ date: new Date(date[2], date[0], date[1]), name: "name" + i, value: bmiData[i] });
+            data.push({ date: new Date(date[2], date[0] - 1, date[1]), name: "name" + i, value: bmiData[i] });
         }
 
         chart.data = data;

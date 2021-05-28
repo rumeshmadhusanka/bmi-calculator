@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import 'materialize-css/dist/css/materialize.min.css';
+import 'react-calendar/dist/Calendar.css';
+import '../DatePicker.css';
 import './App.css';
 import BmiForm from '../BmiForm/BmiForm';
 import Info from '../Info/Info';
 import { getData, storeData } from '../../helpers/localStorage';
-
 import { Grid } from '@material-ui/core'
+import DatePicker from 'react-date-picker';
 
 import Chart from '../Chart'
 
@@ -14,6 +16,7 @@ const App = () => {
   const initialState = () => getData('data') || [];
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
+  const [calendarDate, onChange] = useState(new Date());
 
   useEffect(() => {
     storeData('data', state);
@@ -31,6 +34,11 @@ const App = () => {
     let len = newVal.length;
     if (len > 7) newVal = newVal.slice(1, len);
     setState(newVal);
+  };
+
+  const onChangeDate = date => {
+    onChange(date);
+    console.log(date, calendarDate);
   };
 
   const handleDelete = id => {
@@ -57,7 +65,20 @@ const App = () => {
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <BmiForm change={handleChange} />
+          <div className='row center'>
+            <div>
+              <label>Date</label>
+              <DatePicker
+                  onChange={onChangeDate}
+                  value={calendarDate}
+                  maxDate={new Date()}
+              />
+            </div>
+          </div>
+        </Grid>
+
+        <Grid item xs={12} sm={12}>
+          <BmiForm change={handleChange} calendarDate={calendarDate} />
         </Grid>
 
       </Grid>
