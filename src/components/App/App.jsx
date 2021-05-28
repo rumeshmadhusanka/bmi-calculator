@@ -4,8 +4,11 @@ import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 import BmiForm from '../BmiForm/BmiForm';
 import Info from '../Info/Info';
-import Bar from '../Bar/Bar';
 import { getData, storeData } from '../../helpers/localStorage';
+
+import { Grid } from '@material-ui/core'
+
+import Chart from '../Chart'
 
 const App = () => {
   const initialState = () => getData('data') || [];
@@ -61,59 +64,68 @@ const App = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='row center'>
-        <h1 className='white-text'> BMI Tracker </h1>
-      </div>
-      <div className='row'>
-        <div className='col m12 s12'>
-          <section>
-            <BmiForm change={handleChange} />
-          </section>
-          <section>
-            <Bar labelData={data.date} bmiData={data.bmi} />
-          </section>
-          <section>
-            <div>
-              <div className='row center'>
-                <h4 className='white-text'>7 Day Data</h4>
-              </div>
-              <div className='data-container row'>
-                {state.length > 0 ? (
-                  <>
-                    {state.map(info => (
-                      <Info
-                        key={info.id}
-                        id={info.id}
-                        weight={info.weight}
-                        height={info.height}
-                        date={info.date}
-                        bmi={info.bmi}
-                        deleteCard={handleDelete}
-                      />
-                    ))}
-                  </>
-                ) : (
-                    <div className='center white-text'>No log found</div>
-                  )}
-              </div>
-            </div>
-          </section>
-          <section>
-            {getData('lastState') !== null ? (
-              <div className='center'>
-                <button className='calculate-btn' onClick={handleUndo}>
-                  Undo
-                </button>
-              </div>
+    <Grid container spacing={3}>
+
+      <Grid item xs={12} sm={12}>
+
+        <Grid item xs={12} sm={12}>
+          <div className='row center'>
+            <h1 className='white-text'> BMI Tracker </h1>
+          </div>
+        </Grid>
+
+        <Grid item xs={12} sm={12}>
+          <BmiForm change={handleChange} />
+        </Grid>
+
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <Chart labelData={data.date} bmiData={data.bmi} />
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <div>
+          <div className='row center'>
+            <h4 className='white-text'>7 Day Data</h4>
+          </div>
+          <div className='data-container row'>
+            {state.length > 0 ? (
+              <>
+                {state.map(info => (
+                  <Info
+                    key={info.id}
+                    id={info.id}
+                    weight={info.weight}
+                    height={info.height}
+                    date={info.date}
+                    bmi={info.bmi}
+                    deleteCard={handleDelete}
+                  />
+                ))}
+              </>
             ) : (
-                ''
-              )}
-          </section>
-          
+              <div className='center white-text'>No log found</div>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
+
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        {getData('lastState') !== null ? (
+          <div className='center'>
+            <button className='calculate-btn' onClick={handleUndo}>
+              Undo
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
+      </Grid>
+
+    </Grid>
+
   );
 };
 
