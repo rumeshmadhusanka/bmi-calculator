@@ -94,11 +94,12 @@ const BmiForm = ({ change, calendarDate }) => {
 			}, 5000)
 		} else {
 			setWeightError({ error: false, errorMsg: "" })
-			const date = new Date().toLocaleString().split(',')[0];
+			const date = calendarDate.toLocaleString().split(',')[0];
 			setState({
 				...state,
 				[name]: value,
-				date
+				date,
+				dateObject: calendarDate
 			});
 		}
 	};
@@ -123,7 +124,8 @@ const BmiForm = ({ change, calendarDate }) => {
 			setState({
 				...state,
 				[name]: value,
-				date
+				date,
+				dateObject: calendarDate
 			});
 		}
 	};

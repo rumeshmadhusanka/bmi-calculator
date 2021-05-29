@@ -60,7 +60,6 @@ const App = () => {
 
   const onChangeDate = date => {
     onChange(date);
-    console.log(date, calendarDate);
   };
 
   const handleDelete = id => {
@@ -106,7 +105,8 @@ const App = () => {
         </Grid>
       </Grid>
       <Grid ref={myRef} item xs={12} sm={12}>
-        <div className="center"><h1>{`Your current BMI is: ${state && state[state.length - 1] && state.length > 0 ? state[state.length - 1].bmi : "-"}`}</h1></div>
+        <div className="center"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.date - a.date)[0].bmi : "-"}`
+        }</h1></div>
       </Grid>
 
       <Grid item xs={12} sm={6}>
