@@ -114,7 +114,7 @@ label {
 }
 
 .darkSkyBlue {
-  background-color: #90deb3;
+  background-color:#62a8f8;
 }
 
 .aquamarine {
@@ -123,4 +123,8 @@ label {
 
 .electricBlue {
   background-color: #90F3FF;
+}
+
+.date-align {
+  text-align: left;
 }

@@ -6,9 +6,10 @@ import '../DatePicker.css';
 import './App.css';
 import BmiForm from '../BmiForm/BmiForm';
 import Info from '../Info/Info';
+import Description from '../Info/Description';
 import { getData, storeData } from '../../helpers/localStorage';
 import { Grid } from '@material-ui/core'
-import DatePicker from 'react-date-picker';
+// import DatePicker from 'react-date-picker';
 
 import Chart from '../Chart'
 
@@ -16,7 +17,7 @@ const App = () => {
   const initialState = () => getData('data') || [];
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
-  const [calendarDate, onChange] = useState(new Date());
+  // const [calendarDate, onChange] = useState(new Date());
   const myRef = useRef(null)
 
   const colors = ['', 'lightBlue', 'darkSkyBlue', 'aquamarine', 'electricBlue']
@@ -58,10 +59,10 @@ const App = () => {
     executeScroll()
   };
 
-  const onChangeDate = date => {
-    onChange(date);
-    console.log(date, calendarDate);
-  };
+  // const onChangeDate = date => {
+  //   onChange(date);
+  //   console.log(date, calendarDate);
+  // };
 
   const handleDelete = id => {
     storeData('lastState', state);
@@ -84,26 +85,22 @@ const App = () => {
             <h1 className='white-text'> BMI Tracker </h1>
           </div>
         </Grid>
+        <Grid item xs={12} sm={12}>
+          <div className='row center'>
+            <h6 className='white-text'> BMI Tracker calculates the BMI value </h6>
+          </div>
+        </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
-    
-          <div className='row center'>
-            <div>
-              <label>Date</label>
-              <DatePicker
-                  onChange={onChangeDate}
-                  value={calendarDate}
-                  maxDate={new Date()}
-              />
-            </div>
-          </div>
-        </Grid>
 
-        <Grid item xs={12} sm={12}>
-          <div style = {{margin : '30px'}}>
-            <BmiForm change={handleChange} calendarDate={calendarDate} />
-          </div>
+          <Grid item xs={12} sm={12}>
+            <div style = {{margin : '30px'}}>
+              <BmiForm change={handleChange} />
+            </div>
+          </Grid>
+           
         </Grid>
+        
       </Grid>
 
       <Grid ref={myRef} item xs={12} sm={6}>
@@ -147,6 +144,13 @@ const App = () => {
             ''
           )}
         </Grid>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+      <section></section>
+        <div style = {{margin : '20px'}}>
+            <Description />
+        </div>
+           
       </Grid>
     </Grid>
 
