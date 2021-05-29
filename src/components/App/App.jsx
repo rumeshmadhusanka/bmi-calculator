@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'react-calendar/dist/Calendar.css';
@@ -17,6 +17,7 @@ const App = () => {
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
   const [calendarDate, onChange] = useState(new Date());
+  const myRef = useRef(null)
 
   const colors = ['', 'lightBlue', 'darkSkyBlue', 'aquamarine', 'electricBlue']
   const sections = [...document.getElementsByTagName('section')]
@@ -44,6 +45,8 @@ const App = () => {
     setData(newData);
   }, [state]);
 
+  const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
   const handleChange = val => {
     let heightInM = val.height / 100;
     val.bmi = (val.weight / (heightInM * heightInM)).toFixed(2);
@@ -52,6 +55,7 @@ const App = () => {
     let len = newVal.length;
     if (len > 7) newVal = newVal.slice(1, len);
     setState(newVal);
+    executeScroll()
   };
 
   const onChangeDate = date => {
@@ -102,7 +106,7 @@ const App = () => {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} sm={6}>
+      <Grid ref={myRef} item xs={12} sm={6}>
         <Chart labelData={data.date} bmiData={data.bmi} />
       </Grid>
       <section></section>
