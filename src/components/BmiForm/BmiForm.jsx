@@ -86,18 +86,25 @@ const BmiForm = ({ change }) => {
 		console.log(value)
 		if ((value > 999 || value < 1) && value !== "") {
 			setWeightError({ error: true, errorMsg: `Enter valid weight between 1 and ${weightMax}` })
+			setTimeout(() => {
+				setWeightError({ error: false, errorMsg: "" })
+			}, 5000)
 		}
 		else if (isNaN(parseFloat(value)) && value !== "") {
-			setWeightError({ error: true, errorMsg: "Only enter numbers" })
+			setWeightError({ error: true, errorMsg: "Invalid input" })
+			setTimeout(() => {
+				setWeightError({ error: false, errorMsg: "" })
+			}, 5000)
 		} else {
 			setWeightError({ error: false, errorMsg: "" })
+			const date = calendarDate.toLocaleString().split(',')[0];
+			setState({
+				...state,
+				[name]: value,
+				date,
+				dateObject: calendarDate
+			});
 		}
-		const date = new Date().toLocaleString().split(',')[0];
-		setState({
-			...state,
-			[name]: value,
-			date
-		});
 	};
 
 	const handleChangeHeight = e => {
@@ -105,18 +112,25 @@ const BmiForm = ({ change }) => {
 		console.log(value)
 		if ((value > 999 || value < 1) && value !== "") {
 			setHeightError({ error: true, errorMsg: `Enter valid height between 1 and ${heightMax}` })
+			setTimeout(() => {
+				setHeightError({ error: false, errorMsg: "" })
+			}, 5000)
 		}
 		else if (isNaN(parseFloat(value)) && value !== "") {
-			setHeightError({ error: true, errorMsg: "Only enter numbers" })
+			setHeightError({ error: true, errorMsg: "Invalid input" })
+			setTimeout(() => {
+				setHeightError({ error: false, errorMsg: "" })
+			}, 5000)
 		} else {
 			setHeightError({ error: false, errorMsg: "" })
+			const date = calendarDate.toLocaleString().split(',')[0];
+			setState({
+				...state,
+				[name]: value,
+				date,
+				dateObject: calendarDate
+			});
 		}
-		const date = calendarDate.toLocaleString().split(',')[0];
-		setState({
-			...state,
-			[name]: value,
-			date
-		});
 	};
 
 	const onChangeDate = date => {
