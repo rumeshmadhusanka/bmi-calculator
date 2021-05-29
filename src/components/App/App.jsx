@@ -7,7 +7,7 @@ import './App.css';
 import BmiForm from '../BmiForm/BmiForm';
 import Info from '../Info/Info';
 import { getData, storeData } from '../../helpers/localStorage';
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
 
 import Chart from '../Chart'
@@ -21,20 +21,20 @@ const App = () => {
 
   const colors = ['', 'lightBlue', 'darkSkyBlue', 'aquamarine', 'electricBlue']
   const sections = [...document.getElementsByTagName('section')]
-  
+
   window.addEventListener('scroll', function () {
 
     const scrollFromTop = window.pageYOffset
-  
+
     for (let i = 0; sections.length > i; i++) {
-  
+
       if (scrollFromTop <= sections[i].offsetTop) {
-        document.body.className = colors[i] 
+        document.body.className = colors[i]
         break
-      } 
-  
+      }
+
     }
-  
+
   })
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const App = () => {
     setData(newData);
   }, [state]);
 
-  const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth' })
 
   const handleChange = val => {
     let heightInM = val.height / 100;
@@ -60,7 +60,6 @@ const App = () => {
 
   const onChangeDate = date => {
     onChange(date);
-    console.log(date, calendarDate);
   };
 
   const handleDelete = id => {
@@ -86,32 +85,36 @@ const App = () => {
         </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
-    
+
           <div className='row center'>
             <div>
               <label>Date</label>
               <DatePicker
-                  onChange={onChangeDate}
-                  value={calendarDate}
-                  maxDate={new Date()}
+                onChange={onChangeDate}
+                value={calendarDate}
+                maxDate={new Date()}
               />
             </div>
           </div>
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <div style = {{margin : '30px'}}>
+          <div style={{ margin: '30px' }}>
             <BmiForm change={handleChange} calendarDate={calendarDate} />
           </div>
         </Grid>
       </Grid>
+      <Grid ref={myRef} item xs={12} sm={12}>
+        <div className="center"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.date - a.date)[0].bmi : "-"}`
+        }</h1></div>
+      </Grid>
 
-      <Grid ref={myRef} item xs={12} sm={6}>
+      <Grid item xs={12} sm={6}>
         <Chart labelData={data.date} bmiData={data.bmi} />
       </Grid>
       <section></section>
       <Grid item xs={12} sm={6}>
-        <div style = {{margin : '20px'}}>
+        <div style={{ margin: '20px' }}>
           <div className='row center'>
             <h4 className='white-text'>7 Day Data</h4>
           </div>
@@ -135,7 +138,7 @@ const App = () => {
             )}
           </div>
         </div>
-        
+
         <Grid container direction="row" justify="center" alignItems="center" >
           {getData('lastState') !== null ? (
             <div className='center'>
