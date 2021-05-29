@@ -4,6 +4,7 @@ import '../App/App.css';
 // import Dictaphone from '../SpeechRec/SpeechRec';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import spiritedaway from "@amcharts/amcharts4/.internal/themes/spiritedaway";
 
 const initialValues = {
 	weight: '',
@@ -11,7 +12,7 @@ const initialValues = {
 	date: ''
 }
 let speechRecognitionOn = false;
-
+let unitSystem = "metric" //OR 'imperial'
 const BmiForm = ({ change, calendarDate }) => {
 	const [state, setState] = useState(initialValues);
 	const [weightError, setWeightError] = useState({ error: false, errorMsg: "" })
@@ -23,6 +24,23 @@ const BmiForm = ({ change, calendarDate }) => {
 
 	let heightMax = 200
 	let weightMax = 500
+
+	useEffect( ()=>{
+
+		fetch("https://ipinfo.io/?token=575df63ec9a20d",{mode:"cors",headers: {
+				'Content-Type': 'application/json'
+			}}).then(res=>res.json()).then(data=> {
+			if (data.country==="US"){
+				//imperial system
+				//change unit to imperial
+				unitSystem ="imperial";
+				console.log("Using imperial unit system");
+			}else{
+				unitSystem ="metric";
+				console.log("Using metric unit system");
+			}
+		})
+	},[])
 
 	useEffect(() => {
 		if (transcript === "" || transcript === oldTranscript) {
@@ -42,7 +60,8 @@ const BmiForm = ({ change, calendarDate }) => {
 			(transcript.includes("centi") || transcript.includes("cm"))) {
 			setSpeechValue("Found value");
 
-			//todo enter the values to graph
+			//todo read out the entered value
+			//todo
 			resetTranscript();
 		}
 		setOldTranscript(transcript);
@@ -67,7 +86,7 @@ const BmiForm = ({ change, calendarDate }) => {
 		speechRecognitionOn = !speechRecognitionOn;
 		if (speechRecognitionOn) {
 			setSpeechValue("Speech Recognition started");
-			return SpeechRecognition.startListening({ continuous: true, language: 'en-IN' })
+			return SpeechRecognition.startListening({ continuous: true })
 		} else {
 			speechRecognitionOn = false;
 			setSpeechValue("Speech Recognition stopped");
@@ -136,7 +155,7 @@ const BmiForm = ({ change, calendarDate }) => {
 							value={state.weight}
 							onChange={handleChangeWeight}
 						/>
-						<p class="error">{weightError.errorMsg}</p>
+						<p className="error">{weightError.errorMsg}</p>
 						<label htmlFor="height">Height (in cm)</label>
 						<input
 							className={"bmiform"}
@@ -146,7 +165,7 @@ const BmiForm = ({ change, calendarDate }) => {
 							value={state.height}
 							onChange={handleChangeHeight}
 						/>
-						<p class="error">{heightError.errorMsg}</p>
+						<p className="error">{heightError.errorMsg}</p>
 					</div>
 				</div>
 				<button
