@@ -14,27 +14,32 @@ let speechRecognitionOn = false;
 
 const BmiForm = ({ change, calendarDate }) => {
 	const [state, setState] = useState(initialValues);
+	const [weightError, setWeightError] = useState({ error: false, errorMsg: "" })
+	const [heightError, setHeightError] = useState({ error: false, errorMsg: "" })
 	const [oldTranscript, setOldTranscript] = useState('');
 	const [speechValue, setSpeechValue] = useState("");
-	const { speak,cancel,speaking} = useSpeechSynthesis();
+	const { speak, cancel, speaking } = useSpeechSynthesis();
 	const { transcript, resetTranscript } = useSpeechRecognition();
 
-	useEffect(()=>{
-		if (transcript===""|| transcript===oldTranscript){
+	let heightMax = 200
+	let weightMax = 500
+
+	useEffect(() => {
+		if (transcript === "" || transcript === oldTranscript) {
 			return;
 		}
-		if (transcript.includes("off")|| transcript.includes("shut")|| transcript.includes("kill")){
+		if (transcript.includes("off") || transcript.includes("shut") || transcript.includes("kill")) {
 			SpeechRecognition.abortListening();
 			setOldTranscript("")
 			speechRecognitionOn = false;
 			setSpeechValue("Speech Recognition stopped");
 		}
-		if (transcript.length>100){
+		if (transcript.length > 100) {
 			setOldTranscript("");
 			resetTranscript();
 		}
-		if ((transcript.includes("kilo")|| transcript.includes("kg")) &&
-			(transcript.includes("centi")||transcript.includes("cm") )){
+		if ((transcript.includes("kilo") || transcript.includes("kg")) &&
+			(transcript.includes("centi") || transcript.includes("cm"))) {
 			setSpeechValue("Found value");
 
 			//todo enter the values to graph
@@ -42,28 +47,28 @@ const BmiForm = ({ change, calendarDate }) => {
 		}
 		setOldTranscript(transcript);
 		console.log(transcript);
-	},[transcript])
+	}, [transcript])
 
-	useEffect(()=>{
-		if (speaking){
+	useEffect(() => {
+		if (speaking) {
 			cancel()
 		}
 		speak({ text: speechValue })
-	},[speechValue])
+	}, [speechValue])
 
-	const toggleListen = ()=>{ //continuously listen from mic
+	const toggleListen = () => { //continuously listen from mic
 
 		if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-			let txt ="Browser not supported. Use Google Chrome";
+			let txt = "Browser not supported. Use Google Chrome";
 			console.error(txt)
 			setSpeechValue(txt);
 			return null
 		}
-		speechRecognitionOn = ! speechRecognitionOn;
-		if (speechRecognitionOn){
+		speechRecognitionOn = !speechRecognitionOn;
+		if (speechRecognitionOn) {
 			setSpeechValue("Speech Recognition started");
-			return SpeechRecognition.startListening({ continuous: true,language: 'en-IN' })
-		}else{
+			return SpeechRecognition.startListening({ continuous: true, language: 'en-IN' })
+		} else {
 			speechRecognitionOn = false;
 			setSpeechValue("Speech Recognition stopped");
 			SpeechRecognition.stopListening();
@@ -73,10 +78,35 @@ const BmiForm = ({ change, calendarDate }) => {
 
 
 
-	const handleChange = e => {
+	const handleChangeWeight = e => {
 		let { value, name } = e.target;
-		if (value > 999) {
-			value = 999;
+		console.log(value)
+		if ((value > 999 || value < 1) && value !== "") {
+			setWeightError({ error: true, errorMsg: `Enter valid weight between 1 and ${weightMax}` })
+		}
+		else if (isNaN(parseFloat(value)) && value !== "") {
+			setWeightError({ error: true, errorMsg: "Only enter numbers" })
+		} else {
+			setWeightError({ error: false, errorMsg: "" })
+		}
+		const date = new Date().toLocaleString().split(',')[0];
+		setState({
+			...state,
+			[name]: value,
+			date
+		});
+	};
+
+	const handleChangeHeight = e => {
+		let { value, name } = e.target;
+		console.log(value)
+		if ((value > 999 || value < 1) && value !== "") {
+			setHeightError({ error: true, errorMsg: `Enter valid height between 1 and ${heightMax}` })
+		}
+		else if (isNaN(parseFloat(value)) && value !== "") {
+			setHeightError({ error: true, errorMsg: "Only enter numbers" })
+		} else {
+			setHeightError({ error: false, errorMsg: "" })
 		}
 		const date = calendarDate.toLocaleString().split(',')[0];
 		setState({
@@ -93,38 +123,32 @@ const BmiForm = ({ change, calendarDate }) => {
 
 	return (
 		<>
-			<div className="row">
-				<div className="col m6 s12">
-					<label htmlFor="weight">Weight (in kg)</label>
-					<input
-						className={"bmiform"}
-						id="weight"
-						name="weight"
-						type="number"
-						min="1"
-						max="999"
-						placeholder="50"
-						value={state.weight}
-						onChange={handleChange}
-					/>
-				</div>
 
-				<div className="col m6 s12">
-					<label htmlFor="height">Height (in cm)</label>
-					<input
-						className={"bmiform"}
-						id="height"
-						name="height"
-						type="number"
-						min="1"
-						max="999"
-						placeholder="176"
-						value={state.height}
-						onChange={handleChange}
-					/>
-				</div>
-			</div>
 			<div className="center">
+				<div className="row">
+					<div className="col m12 s12">
+						<label htmlFor="weight">Weight (in kg)</label>
+						<input
+							className={"bmiform"}
+							id="weight"
+							name="weight"
+							placeholder="50"
+							value={state.weight}
+							onChange={handleChangeWeight}
+						/>
+						<p class="error">{weightError.errorMsg}</p>
+						<label htmlFor="height">Height (in cm)</label>
+						<input
+							className={"bmiform"}
+							id="height"
+							name="height"
+							placeholder="176"
+							value={state.height}
+							onChange={handleChangeHeight}
+						/>
+						<p class="error">{heightError.errorMsg}</p>
+					</div>
+				</div>
 				<button
 					id="bmi-btn"
 					className="calculate-btn"
@@ -136,10 +160,10 @@ const BmiForm = ({ change, calendarDate }) => {
 				</button>
 
 				<div>
-					<button onClick={toggleListen}>Toggle Speech Recognition</button>
+					<button className="calculate-btn" onClick={toggleListen}>Toggle Speech Recognition</button>
 					{/*//todo apply style, move to right upper corner*/}
 					<p>{transcript}</p>
-				{/*	Hide the above*/}
+					{/*	Hide the above*/}
 
 				</div>
 			</div>
