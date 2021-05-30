@@ -6,6 +6,13 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
+import Select from 'react-select';
+
+
+const options = [
+	{ value: 'metric', label: 'Metric (kg/cm)' },
+	{ value: 'imperial', label: 'Imperial (lb/ft)' },
+];
 
 const initialValues = {
 	weight: '',
@@ -23,6 +30,7 @@ const BmiForm = ({ change }) => {
 	const { speak, cancel, speaking } = useSpeechSynthesis();
 	const { transcript, resetTranscript } = useSpeechRecognition();
 	const [calendarDate, onChange] = useState(new Date());
+	const [unit, setUnit] = useState({ value: 'metric', label: 'Metric (kg/cm)' });
 
 	let heightMax = 200
 	let weightMax = 500
@@ -198,11 +206,11 @@ const BmiForm = ({ change }) => {
 		<>
 			<div className="container">
 			<div className="center">
-				<Grid container xs={12} sm={12} spacing={2}>
+				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12}>
 						<Grid item xs={12} sm={12}>
 							<div className='row center'>
-								<h1 className='white-text' style={{marginBottom:'2px'}}> BMI Tracker </h1>
+								<h1 className='white-text' style={{marginBottom:'2px', marginTop: '60px'}}> BMI Tracker </h1>
 							</div>
 						</Grid>
 						<Grid item xs={12} sm={12}>
@@ -212,7 +220,7 @@ const BmiForm = ({ change }) => {
 						</Grid>
 					</Grid>
 					<Grid item xs={12} sm={12}>
-						<div className='row center' style={{marginBottom:'-50px'}}>
+						<div className='voice-button'>
 							<button className="calculate-btn" onClick={toggleListen}>Voice Button</button>
 							{/*//todo apply style, move to right upper corner*/}
 							<p>{transcript}</p>
@@ -220,10 +228,19 @@ const BmiForm = ({ change }) => {
 
 						</div>
 					</Grid>
+					<Grid item xs={4} sm={4} >
+
+					</Grid>
+					<Grid item xs={4} sm={4}>
+						<Select
+							value={unit}
+							onChange={setUnit}
+							options={options}
+						/>
+					/>
+					</Grid>
 				</Grid>
-
-				<Grid container xs={12} sm={12} >
-
+				<Grid container  >
 					<Grid item xs={12} sm={6}>
 						<label htmlFor="weight">Weight (in kg)</label>
 						<input
@@ -234,7 +251,7 @@ const BmiForm = ({ change }) => {
 							value={state.weight}
 							onChange={handleChangeWeight}
 						/>
-						<p class="error">{weightError.errorMsg}</p>
+						<p className="error">{weightError.errorMsg}</p>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<label htmlFor="height">Height (in cm)</label>
@@ -246,7 +263,7 @@ const BmiForm = ({ change }) => {
 							value={state.height}
 							onChange={handleChangeHeight}
 						/>
-						<p class="error">{heightError.errorMsg}</p>
+						<p className="error">{heightError.errorMsg}</p>
 					</Grid>
 
 				</Grid>
@@ -273,11 +290,9 @@ const BmiForm = ({ change }) => {
 					>
 						Calculate BMI
 					</button>
+
 				</div>
 				</Grid>
-
-
-
 			</div>
 			</div>
 		</>
