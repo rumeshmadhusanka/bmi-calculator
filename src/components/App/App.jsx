@@ -8,8 +8,7 @@ import BmiForm from '../BmiForm/BmiForm';
 import Info from '../Info/Info';
 import Description from '../Info/Description';
 import { getData, storeData } from '../../helpers/localStorage';
-import { Grid, Typography } from '@material-ui/core'
-import DatePicker from 'react-date-picker';
+import { Grid } from '@material-ui/core'
 
 import Chart from '../Chart'
 
@@ -17,7 +16,6 @@ const App = () => {
   const initialState = () => getData('data') || [];
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
-  // const [calendarDate, onChange] = useState(new Date());
   const myRef = useRef(null)
 
   const colors = ['', 'lightBlue', 'darkSkyBlue', 'aquamarine', 'electricBlue']
@@ -33,9 +31,7 @@ const App = () => {
         document.body.className = colors[i]
         break
       }
-
     }
-
   })
 
   useEffect(() => {
@@ -59,11 +55,6 @@ const App = () => {
     setState(newVal);
     executeScroll()
   };
-
-  // const onChangeDate = date => {
-  //   onChange(date);
-  //   console.log(date, calendarDate);
-  // };
 
   const handleDelete = id => {
     storeData('lastState', state);
@@ -111,7 +102,6 @@ const App = () => {
             {state.length > 0 ? (
               <>
                 {
-
                   state.slice(0).reverse().map(info => (
                   <Info
                     key={info.id}

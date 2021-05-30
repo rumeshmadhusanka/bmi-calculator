@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../App/App.css';
-// import Dictaphone from '../SpeechRec/SpeechRec';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
 import Select from 'react-select';
-
 
 const options = [
 	{ value: 'metric', label: 'Metric (kg/cm)' },
@@ -19,6 +17,7 @@ const initialValues = {
 	height: '',
 	date: ''
 }
+
 let speechRecognitionOn = false;
 const BmiForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
@@ -66,8 +65,6 @@ const BmiForm = ({ change }) => {
 				'Content-Type': 'application/json'
 			}}).then(res=>res.json()).then(data=> {
 			if (data.country==="US"){
-				//imperial system
-				//change unit to imperial
 				setUnit({ value: 'imperial', label: 'Imperial (lb/ft)' })
 				console.log("Using imperial unit system");
 			}else{
@@ -247,7 +244,6 @@ const BmiForm = ({ change }) => {
 					<Grid item xs={12} sm={12}>
 						<div className='voice-button'>
 							<button className={getVoiceBtnClassName()} onClick={toggleListen}>Speech Assistant</button>
-							{/*//todo apply style, move to right upper corner*/}
 							<p>{transcript}</p>
 							{/*	Hide the above*/}
 
@@ -262,7 +258,6 @@ const BmiForm = ({ change }) => {
 							onChange={setUnit}
 							options={options}
 						/>
-					/>
 					</Grid>
 				</Grid>
 				<Grid container  >
@@ -315,7 +310,6 @@ const BmiForm = ({ change }) => {
 					>
 						Calculate BMI
 					</button>
-
 				</div>
 				</Grid>
 			</div>
