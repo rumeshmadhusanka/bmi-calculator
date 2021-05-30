@@ -24,26 +24,32 @@ const Info = () => {
     <div className="col m12 s12">
       <div className="card blue-grey darken-1">
         <div className="card-content">
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={12}>
             <span className="card-title">
               BMI Description
             </span>  
           </Grid>
-          <div className="col s2">
-            <div class="card-image">
-                <img src={BMIImage} alt="BMI"/>
-            </div>   
-          </div>
           
+        <div className="row" style={{marginTop:"20px"}}>
+            <Grid container xs={12} sm={12}>
+                <Grid item xs={12} sm={6}>
+                    <div>
+                        <h4>About Adult BMI</h4>
+                        <p>
+                        Body mass index (BMI) is a person’s weight in kilograms divided by the square of height in meters. BMI is an inexpensive and easy screening method for weight category—underweight, healthy weight, overweight, and obesity.
 
-          <div style={{marginTop:"20px"}}>
-            <h4>About Adult BMI</h4>
-            <p>
-            Body mass index (BMI) is a person’s weight in kilograms divided by the square of height in meters. BMI is an inexpensive and easy screening method for weight category—underweight, healthy weight, overweight, and obesity.
-
-            BMI does not measure body fat directly, but BMI is moderately correlated with more direct measures of body fat 1,2,3. Furthermore, BMI appears to be as strongly correlated with various metabolic and disease outcome as are these more direct measures of body fatness
-            </p>  
-          </div>
+                        BMI does not measure body fat directly, but BMI is moderately correlated with more direct measures of body fat 1,2,3. Furthermore, BMI appears to be as strongly correlated with various metabolic and disease outcome as are these more direct measures of body fatness
+                        </p>  
+                    </div>      
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <div class="card-image">
+                        <img src={BMIImage} alt="BMI"/>
+                    </div>
+                </Grid>
+            </Grid>   
+        </div>
+          
           <div style={{marginTop:"20px"}}>
             <h4>How is BMI used?</h4>
             <p>

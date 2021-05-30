@@ -80,16 +80,6 @@ const App = () => {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
 
-        <Grid item xs={12} sm={12}>
-          <div className='row center'>
-            <h1 className='white-text'> BMI Tracker </h1>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <div className='row center'>
-            <h6 className='white-text'> BMI Tracker calculates the BMI value </h6>
-          </div>
-        </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
 

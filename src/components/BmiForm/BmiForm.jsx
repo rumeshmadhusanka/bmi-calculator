@@ -145,9 +145,33 @@ const BmiForm = ({ change }) => {
 
 	return (
 		<>
-
+			<div className="container">
 			<div className="center">
-				<Grid container xs={12} sm={12}>
+				<Grid container xs={12} sm={12} spacing={2}>
+					<Grid item xs={12} sm={10}>
+						<Grid item xs={12} sm={12}>
+							<div className='row center'>
+								<h1 className='white-text' style={{marginBottom:'2px'}}> BMI Tracker </h1>
+							</div>
+						</Grid>
+						<Grid item xs={12} sm={12}>
+							<div>
+								<h6 className='white-text'> Body mass index (BMI) Tracker tracks your BMI changes. </h6>
+							</div>
+						</Grid>	
+					</Grid>
+					<Grid item xs={12} sm={2}>
+						<div className='row center'>
+							<button className="calculate-btn" onClick={toggleListen}>Voice Button</button>
+							{/*//todo apply style, move to right upper corner*/}
+							<p>{transcript}</p>
+							{/*	Hide the above*/}
+
+						</div>	
+					</Grid>
+				</Grid>
+				
+				<Grid container xs={12} sm={12} style={{marginTop:'20px'}}>
 					<Grid item xs={12} sm={8}>
 						<div className="col m12 s12">
 							<label htmlFor="weight">Weight (in kg)</label>
@@ -198,13 +222,7 @@ const BmiForm = ({ change }) => {
 				</div>
 				
 
-				<div>
-					<button className="calculate-btn" onClick={toggleListen}>Toggle Speech Recognition</button>
-					{/*//todo apply style, move to right upper corner*/}
-					<p>{transcript}</p>
-					{/*	Hide the above*/}
-
-				</div>
+			</div>	
 			</div>
 		</>
 	);
