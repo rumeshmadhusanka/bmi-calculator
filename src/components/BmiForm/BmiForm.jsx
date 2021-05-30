@@ -6,6 +6,13 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
+import Select from 'react-select';
+
+
+const options = [
+	{ value: 'metric', label: 'Metric (kg/cm)' },
+	{ value: 'imperial', label: 'Imperial (lb/ft)' },
+];
 
 const initialValues = {
 	weight: '',
@@ -23,6 +30,7 @@ const BmiForm = ({ change }) => {
 	const { speak, cancel, speaking } = useSpeechSynthesis();
 	const { transcript, resetTranscript } = useSpeechRecognition();
 	const [calendarDate, onChange] = useState(new Date());
+	const [unit, setUnit] = useState({ value: 'metric', label: 'Metric (kg/cm)' });
 
 	let heightMax = 200
 	let weightMax = 500
@@ -169,10 +177,19 @@ const BmiForm = ({ change }) => {
 
 						</div>
 					</Grid>
+					<Grid item xs={4} sm={4} >
+
+					</Grid>
+					<Grid item xs={4} sm={4}>
+						<Select
+							value={unit}
+							onChange={setUnit}
+							options={options}
+						/>
+					/>
+					</Grid>
 				</Grid>
-
 				<Grid container xs={12} sm={12} >
-
 					<Grid item xs={12} sm={6}>
 						<label htmlFor="weight">Weight (in kg)</label>
 						<input
@@ -222,10 +239,9 @@ const BmiForm = ({ change }) => {
 					>
 						Calculate BMI
 					</button>
+
 				</div>
 				</Grid>
-
-
 			</div>
 			</div>
 		</>
