@@ -84,8 +84,8 @@ export default function Chart({ labelData = [], bmiData = [] }) {
         const range = axis.axisRanges.create();
         range.value = point;
         range.label.text = label;
-        range.label.fill = am4core.color("#ffffff");
-        range.label.stroke = am4core.color("#000000");
+        range.label.fill = am4core.color("#111111");
+        // range.label.stroke = am4core.color("#000000");
         range.label.inside = true;
         range.label.verticalCenter = position;
     }

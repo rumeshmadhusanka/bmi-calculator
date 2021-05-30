@@ -44,6 +44,7 @@ const App = () => {
     const bmi = state.map(obj => obj.bmi);
     let newData = { date, bmi };
     setData(newData);
+    console.log(state, state.sort((a, b) => b.date - a.date));
   }, [state]);
 
   const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -88,12 +89,12 @@ const App = () => {
               <BmiForm change={handleChange} />
             </div>
           </Grid>
-           
+
         </Grid>
-        
+
       </Grid>
       <Grid ref={myRef} item xs={12} sm={12}>
-        <div className="center white-text"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.date - a.date)[state.length - 1].bmi : "-"}`
+        <div className="center white-text"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.dateObject - a.dateObject)[0].bmi : "-"}`
         }</h1></div>
       </Grid>
 
@@ -109,7 +110,9 @@ const App = () => {
           <div className='data-container row' style={{maxHeight:'400px', overflowY:'scroll', overflowX:'hidden'}}>
             {state.length > 0 ? (
               <>
-                {state.map(info => (
+                {
+
+                  state.slice(0).reverse().map(info => (
                   <Info
                     key={info.id}
                     id={info.id}
@@ -119,7 +122,9 @@ const App = () => {
                     bmi={info.bmi}
                     deleteCard={handleDelete}
                   />
-                ))}
+                ))
+
+                }
               </>
             ) : (
               <div className='center white-text'>No log found</div>
@@ -144,7 +149,7 @@ const App = () => {
         <div style = {{margin : '20px'}}>
             <Description />
         </div>
-           
+
       </Grid>
     </Grid>
 

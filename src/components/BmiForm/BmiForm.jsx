@@ -102,7 +102,7 @@ const BmiForm = ({ change }) => {
 				...state,
 				[name]: value,
 				date,
-				dateObject: calendarDate
+				dateObject: new Date(calendarDate)
 			});
 		}
 	};
@@ -128,7 +128,7 @@ const BmiForm = ({ change }) => {
 				...state,
 				[name]: value,
 				date,
-				dateObject: calendarDate
+				dateObject: new Date(calendarDate)
 			});
 		}
 	};
@@ -158,7 +158,7 @@ const BmiForm = ({ change }) => {
 							<div>
 								<h6 className='white-text'> Body mass index (BMI) Tracker tracks your BMI changes. </h6>
 							</div>
-						</Grid>	
+						</Grid>
 					</Grid>
 					<Grid item xs={12} sm={2}>
 						<div className='row center'>
@@ -167,10 +167,9 @@ const BmiForm = ({ change }) => {
 							<p>{transcript}</p>
 							{/*	Hide the above*/}
 
-						</div>	
+						</div>
 					</Grid>
 				</Grid>
-				
 				<Grid container xs={12} sm={12} style={{marginTop:'20px'}}>
 					<Grid item xs={12} sm={8}>
 						<div className="col m12 s12">
@@ -194,7 +193,7 @@ const BmiForm = ({ change }) => {
 								onChange={handleChangeHeight}
 							/>
 							<p class="error">{heightError.errorMsg}</p>
-						</div>	
+						</div>
 					</Grid>
 					<Grid item xs={12} sm={1}>
 						<div className='col m12 s12'>
@@ -206,8 +205,8 @@ const BmiForm = ({ change }) => {
 									maxDate={new Date()}
 								/>
 							</div>
-						</div>	
-					</Grid>			
+						</div>
+					</Grid>
 				</Grid>
 				<div style={{marginTop: '16px'}}>
 					<button
@@ -218,11 +217,11 @@ const BmiForm = ({ change }) => {
 						onClick={handleSubmit}
 					>
 						Calculate BMI
-					</button>	
+					</button>
 				</div>
-				
 
-			</div>	
+
+			</div>
 			</div>
 		</>
 	);
