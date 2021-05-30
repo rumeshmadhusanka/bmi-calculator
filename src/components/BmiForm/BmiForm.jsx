@@ -4,6 +4,8 @@ import '../App/App.css';
 // import Dictaphone from '../SpeechRec/SpeechRec';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { Grid } from '@material-ui/core'
+import DatePicker from 'react-date-picker';
 import spiritedaway from "@amcharts/amcharts4/.internal/themes/spiritedaway";
 
 const initialValues = {
@@ -12,6 +14,8 @@ const initialValues = {
 	date: ''
 }
 let speechRecognitionOn = false;
+
+const BmiForm = ({ change }) => {
 let unitSystem = "metric" //OR 'imperial'
 const BmiForm = ({ change, calendarDate }) => {
 	const [state, setState] = useState(initialValues);
@@ -21,6 +25,7 @@ const BmiForm = ({ change, calendarDate }) => {
 	const [speechValue, setSpeechValue] = useState("");
 	const { speak, cancel, speaking } = useSpeechSynthesis();
 	const { transcript, resetTranscript } = useSpeechRecognition();
+	const [calendarDate, onChange] = useState(new Date());
 
 	let heightMax = 200
 	let weightMax = 500
@@ -149,6 +154,11 @@ const BmiForm = ({ change, calendarDate }) => {
 		}
 	};
 
+	const onChangeDate = date => {
+		onChange(date);
+		console.log(date, calendarDate);
+	  };
+
 	const handleSubmit = () => {
 		change(state);
 		setState(initialValues);
@@ -158,39 +168,56 @@ const BmiForm = ({ change, calendarDate }) => {
 		<>
 
 			<div className="center">
-				<div className="row">
-					<div className="col m12 s12">
-						<label htmlFor="weight">Weight (in kg)</label>
-						<input
-							className={"bmiform"}
-							id="weight"
-							name="weight"
-							placeholder="50"
-							value={state.weight}
-							onChange={handleChangeWeight}
-						/>
-						<p className="error">{weightError.errorMsg}</p>
-						<label htmlFor="height">Height (in cm)</label>
-						<input
-							className={"bmiform"}
-							id="height"
-							name="height"
-							placeholder="176"
-							value={state.height}
-							onChange={handleChangeHeight}
-						/>
-						<p className="error">{heightError.errorMsg}</p>
-					</div>
+				<Grid container xs={12} sm={12}>
+					<Grid item xs={12} sm={8}>
+						<div className="col m12 s12">
+							<label htmlFor="weight">Weight (in kg)</label>
+							<input
+								className={"bmiform"}
+								id="weight"
+								name="weight"
+								placeholder="Weight"
+								value={state.weight}
+								onChange={handleChangeWeight}
+							/>
+							<p class="error">{weightError.errorMsg}</p>
+							<label htmlFor="height">Height (in cm)</label>
+							<input
+								className={"bmiform"}
+								id="height"
+								name="height"
+								placeholder="Height"
+								value={state.height}
+								onChange={handleChangeHeight}
+							/>
+							<p class="error">{heightError.errorMsg}</p>
+						</div>
+					</Grid>
+					<Grid item xs={12} sm={1}>
+						<div className='col m12 s12'>
+							<div>
+								<label>Date</label>
+								<DatePicker
+									onChange={onChangeDate}
+									value={calendarDate}
+									maxDate={new Date()}
+								/>
+							</div>
+						</div>
+					</Grid>
+				</Grid>
+				<div style={{marginTop: '16px'}}>
+					<button
+						id="bmi-btn"
+						className="calculate-btn"
+						type="button"
+						disabled={state.weight === '' || state.height === ''}
+						onClick={handleSubmit}
+					>
+						Calculate BMI
+					</button>
 				</div>
-				<button
-					id="bmi-btn"
-					className="calculate-btn"
-					type="button"
-					disabled={heightError.error || weightError.error}
-					onClick={handleSubmit}
-				>
-					Calculate BMI
-				</button>
+
 
 				<div>
 					<button className="calculate-btn" onClick={toggleListen}>Toggle Speech Recognition</button>
