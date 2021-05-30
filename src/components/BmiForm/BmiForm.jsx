@@ -6,7 +6,6 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
-import spiritedaway from "@amcharts/amcharts4/.internal/themes/spiritedaway";
 
 const initialValues = {
 	weight: '',
@@ -14,9 +13,7 @@ const initialValues = {
 	date: ''
 }
 let speechRecognitionOn = false;
-
-const BmiForm = ({ change }) => {
-let unitSystem = "metric" //OR 'imperial'
+var unitSystem = "metric";
 const BmiForm = ({ change, calendarDate }) => {
 	const [state, setState] = useState(initialValues);
 	const [weightError, setWeightError] = useState({ error: false, errorMsg: "" })
