@@ -20,7 +20,6 @@ const initialValues = {
 	date: ''
 }
 let speechRecognitionOn = false;
-var unitSystem = "metric";
 const BmiForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
 	const [weightError, setWeightError] = useState({ error: false, errorMsg: "" })
@@ -34,6 +33,24 @@ const BmiForm = ({ change }) => {
 
 	let heightMax = 200
 	let weightMax = 500
+	const selectWUnit = ()=>{
+		if (unit.value==="metric"){
+			return ("kg")
+		}else{
+			return ("lb")
+		}
+	}
+	const selectHUnit = ()=>{
+		if (unit.value==="metric"){
+			return ("cm")
+		}else{
+			return ("ft")
+		}
+	}
+
+	useEffect(()=>{
+
+	},[speechRecognitionOn])
 
 	useEffect( ()=>{
 
@@ -43,10 +60,10 @@ const BmiForm = ({ change }) => {
 			if (data.country==="US"){
 				//imperial system
 				//change unit to imperial
-				unitSystem ="imperial";
+				setUnit({ value: 'imperial', label: 'Imperial (lb/ft)' })
 				console.log("Using imperial unit system");
 			}else{
-				unitSystem ="metric";
+				setUnit({ value: 'metric', label: 'Metric (kg/cm)' })
 				console.log("Using metric unit system");
 			}
 		})
@@ -242,7 +259,7 @@ const BmiForm = ({ change }) => {
 				</Grid>
 				<Grid container  >
 					<Grid item xs={12} sm={6}>
-						<label htmlFor="weight">Weight (in kg)</label>
+						<label htmlFor="weight">Weight (in {selectWUnit()})</label>
 						<input
 							className={"bmiform"}
 							id="weight"
@@ -254,7 +271,7 @@ const BmiForm = ({ change }) => {
 						<p className="error">{weightError.errorMsg}</p>
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<label htmlFor="height">Height (in cm)</label>
+						<label htmlFor="height">Height (in {selectHUnit()})</label>
 						<input
 							className={"bmiform"}
 							id="height"
