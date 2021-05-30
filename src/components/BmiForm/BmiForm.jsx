@@ -14,7 +14,7 @@ const initialValues = {
 }
 let speechRecognitionOn = false;
 var unitSystem = "metric";
-const BmiForm = ({ change, calendarDate }) => {
+const BmiForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
 	const [weightError, setWeightError] = useState({ error: false, errorMsg: "" })
 	const [heightError, setHeightError] = useState({ error: false, errorMsg: "" })
@@ -54,16 +54,49 @@ const BmiForm = ({ change, calendarDate }) => {
 			speechRecognitionOn = false;
 			setSpeechValue("Speech Recognition stopped");
 		}
+		if (transcript.includes("reset")) {
+			setOldTranscript("")
+			resetTranscript();
+			setSpeechValue("Reset the values");
+		}
 		if (transcript.length > 100) {
 			setOldTranscript("");
 			resetTranscript();
 		}
-		if ((transcript.includes("kilo") || transcript.includes("kg")) &&
-			(transcript.includes("centi") || transcript.includes("cm"))) {
-			setSpeechValue("Found value");
+		if ((transcript.includes("kilo") || transcript.includes("kg")|| transcript.includes("grams"))) {
+			let weightTemp = 0;
+			weightTemp = transcript.replace(/[^0-9]/g, "");
+			setState({
+				...state,
+				weight: weightTemp,
+				dateObject: new Date(calendarDate)
+			})
+			function s(val, callback = function d(){
+				setTimeout(resetTranscript,2000)}){
+				setSpeechValue("Your weight is "+weightTemp+". Now, please speak your height");
+			}
+			s()
+			resetTranscript();
 
-			//todo read out the entered value
-			//todo
+		}
+
+		if ((transcript.includes("cm") || transcript.includes("centi") || transcript.includes("meter") ||  transcript.includes("CM"))) {
+			let heightTemp = 1;
+			heightTemp = transcript.replace(/[^0-9]/g, "");
+			//todo validate
+			setState({
+				...state,
+				height : heightTemp,
+				dateObject: new Date(calendarDate)
+			})
+
+			let bmi = 0;
+			let hinM = heightTemp/100;
+			bmi = state.weight / hinM**2;
+			bmi = bmi.toFixed(2)
+			setSpeechValue("Your weight is "+heightTemp+". Your BMI is "+bmi);
+
+			//todo categorize the output and read
 			resetTranscript();
 		}
 		setOldTranscript(transcript);
@@ -80,18 +113,18 @@ const BmiForm = ({ change, calendarDate }) => {
 	const toggleListen = () => { //continuously listen from mic
 
 		if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-			let txt = "Browser not supported. Use Google Chrome";
+			let txt = "Your Browser is not supported. Please switch to Google Chrome to enable speech support";
 			console.error(txt)
 			setSpeechValue(txt);
 			return null
 		}
 		speechRecognitionOn = !speechRecognitionOn;
 		if (speechRecognitionOn) {
-			setSpeechValue("Speech Recognition started");
+			setSpeechValue("Speech assistant started... Please speak your weight to calculate your BMI");
 			return SpeechRecognition.startListening({ continuous: true })
 		} else {
 			speechRecognitionOn = false;
-			setSpeechValue("Speech Recognition stopped");
+			setSpeechValue("Speech assistant stopped");
 			SpeechRecognition.stopListening();
 		}
 
