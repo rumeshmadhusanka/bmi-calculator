@@ -44,6 +44,7 @@ const App = () => {
     const bmi = state.map(obj => obj.bmi);
     let newData = { date, bmi };
     setData(newData);
+    console.log(state, state.sort((a, b) => b.date - a.date));
   }, [state]);
 
   const executeScroll = () => myRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -80,16 +81,6 @@ const App = () => {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
 
-        <Grid item xs={12} sm={12}>
-          <div className='row center'>
-            <h1 className='white-text'> BMI Tracker </h1>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <div className='row center'>
-            <h6 className='white-text'> BMI Tracker calculates the BMI value </h6>
-          </div>
-        </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
 
@@ -98,12 +89,12 @@ const App = () => {
               <BmiForm change={handleChange} />
             </div>
           </Grid>
-           
+
         </Grid>
-        
+
       </Grid>
       <Grid ref={myRef} item xs={12} sm={12}>
-        <div className="center"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.date - a.date)[0].bmi : "-"}`
+        <div className="center white-text"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.dateObject - a.dateObject)[0].bmi : "-"}`
         }</h1></div>
       </Grid>
 
@@ -114,12 +105,14 @@ const App = () => {
       <Grid item xs={12} sm={6}>
         <div style={{ margin: '20px' }}>
           <div className='row center'>
-            <h4 className='white-text'>7 Day Data</h4>
+            <h4 className='white-text'>BMI History</h4>
           </div>
-          <div className='data-container row'>
+          <div className='data-container row' style={{maxHeight:'400px', overflowY:'scroll', overflowX:'hidden'}}>
             {state.length > 0 ? (
               <>
-                {state.map(info => (
+                {
+
+                  state.slice(0).reverse().map(info => (
                   <Info
                     key={info.id}
                     id={info.id}
@@ -129,7 +122,9 @@ const App = () => {
                     bmi={info.bmi}
                     deleteCard={handleDelete}
                   />
-                ))}
+                ))
+
+                }
               </>
             ) : (
               <div className='center white-text'>No log found</div>
@@ -154,7 +149,7 @@ const App = () => {
         <div style = {{margin : '20px'}}>
             <Description />
         </div>
-           
+
       </Grid>
     </Grid>
 

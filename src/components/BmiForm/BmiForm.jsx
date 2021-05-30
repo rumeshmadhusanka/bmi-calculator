@@ -120,7 +120,7 @@ const BmiForm = ({ change, calendarDate }) => {
 				...state,
 				[name]: value,
 				date,
-				dateObject: calendarDate
+				dateObject: new Date(calendarDate)
 			});
 		}
 	};
@@ -146,7 +146,7 @@ const BmiForm = ({ change, calendarDate }) => {
 				...state,
 				[name]: value,
 				date,
-				dateObject: calendarDate
+				dateObject: new Date(calendarDate)
 			});
 		}
 	};
@@ -163,46 +163,73 @@ const BmiForm = ({ change, calendarDate }) => {
 
 	return (
 		<>
-
+			<div className="container">
 			<div className="center">
-				<Grid container xs={12} sm={12}>
-					<Grid item xs={12} sm={8}>
-						<div className="col m12 s12">
-							<label htmlFor="weight">Weight (in kg)</label>
-							<input
-								className={"bmiform"}
-								id="weight"
-								name="weight"
-								placeholder="Weight"
-								value={state.weight}
-								onChange={handleChangeWeight}
-							/>
-							<p class="error">{weightError.errorMsg}</p>
-							<label htmlFor="height">Height (in cm)</label>
-							<input
-								className={"bmiform"}
-								id="height"
-								name="height"
-								placeholder="Height"
-								value={state.height}
-								onChange={handleChangeHeight}
-							/>
-							<p class="error">{heightError.errorMsg}</p>
-						</div>
-					</Grid>
-					<Grid item xs={12} sm={1}>
-						<div className='col m12 s12'>
-							<div>
-								<label>Date</label>
-								<DatePicker
-									onChange={onChangeDate}
-									value={calendarDate}
-									maxDate={new Date()}
-								/>
+				<Grid container xs={12} sm={12} spacing={2}>
+					<Grid item xs={12} sm={12}>
+						<Grid item xs={12} sm={12}>
+							<div className='row center'>
+								<h1 className='white-text' style={{marginBottom:'2px'}}> BMI Tracker </h1>
 							</div>
+						</Grid>
+						<Grid item xs={12} sm={12}>
+							<div>
+								<h6 className='white-text'> Body mass index (BMI) Tracker tracks your BMI changes. </h6>
+							</div>
+						</Grid>
+					</Grid>
+					<Grid item xs={12} sm={12}>
+						<div className='row center' style={{marginBottom:'-50px'}}>
+							<button className="calculate-btn" onClick={toggleListen}>Voice Button</button>
+							{/*//todo apply style, move to right upper corner*/}
+							<p>{transcript}</p>
+							{/*	Hide the above*/}
+
 						</div>
 					</Grid>
 				</Grid>
+
+				<Grid container xs={12} sm={12} >
+
+					<Grid item xs={12} sm={6}>
+						<label htmlFor="weight">Weight (in kg)</label>
+						<input
+							className={"bmiform"}
+							id="weight"
+							name="weight"
+							placeholder="Weight"
+							value={state.weight}
+							onChange={handleChangeWeight}
+						/>
+						<p class="error">{weightError.errorMsg}</p>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<label htmlFor="height">Height (in cm)</label>
+						<input
+							className={"bmiform"}
+							id="height"
+							name="height"
+							placeholder="Height"
+							value={state.height}
+							onChange={handleChangeHeight}
+						/>
+						<p class="error">{heightError.errorMsg}</p>
+					</Grid>
+
+				</Grid>
+				<Grid item xs={12} sm={12}>
+					<div className='col m12 s12'>
+						<div>
+							<label>Date</label>
+							<DatePicker
+								onChange={onChangeDate}
+								value={calendarDate}
+								maxDate={new Date()}
+							/>
+						</div>
+					</div>
+				</Grid>
+				<Grid item xs={12} sm={12}>
 				<div style={{marginTop: '16px'}}>
 					<button
 						id="bmi-btn"
@@ -214,15 +241,11 @@ const BmiForm = ({ change, calendarDate }) => {
 						Calculate BMI
 					</button>
 				</div>
+				</Grid>
 
 
-				<div>
-					<button className="calculate-btn" onClick={toggleListen}>Toggle Speech Recognition</button>
-					{/*//todo apply style, move to right upper corner*/}
-					<p>{transcript}</p>
-					{/*	Hide the above*/}
 
-				</div>
+			</div>
 			</div>
 		</>
 	);
