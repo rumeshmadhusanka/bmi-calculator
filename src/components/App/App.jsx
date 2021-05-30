@@ -106,7 +106,7 @@ const App = () => {
           <div className='row center'>
             <h4 className='white-text'>7 Day Data</h4>
           </div>
-          <div className='data-container row'>
+          <div className='data-container row' style={{maxHeight:'400px', overflowY:'scroll', overflowX:'hidden'}}>
             {state.length > 0 ? (
               <>
                 {state.map(info => (
