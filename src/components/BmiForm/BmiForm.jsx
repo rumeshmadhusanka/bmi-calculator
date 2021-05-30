@@ -48,6 +48,13 @@ const BmiForm = ({ change }) => {
 			return ("ft")
 		}
 	}
+	const getVoiceBtnClassName = ()=>{
+		if (speechRecognitionOn){
+			return "calculate-btn voice-button-on"
+		}else{
+			return "calculate-btn"
+		}
+	}
 
 	useEffect(()=>{
 
@@ -239,7 +246,7 @@ const BmiForm = ({ change }) => {
 					</Grid>
 					<Grid item xs={12} sm={12}>
 						<div className='voice-button'>
-							<button className="calculate-btn" onClick={toggleListen}>Voice Button</button>
+							<button className={getVoiceBtnClassName()} onClick={toggleListen}>Speech Assistant</button>
 							{/*//todo apply style, move to right upper corner*/}
 							<p>{transcript}</p>
 							{/*	Hide the above*/}
