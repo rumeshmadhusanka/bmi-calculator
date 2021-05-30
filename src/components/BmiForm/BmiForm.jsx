@@ -33,6 +33,7 @@ const BmiForm = ({ change }) => {
 
 	let heightMax = 200
 	let weightMax = 500
+
 	const selectWUnit = ()=>{
 		if (unit.value==="metric"){
 			return ("kg")
