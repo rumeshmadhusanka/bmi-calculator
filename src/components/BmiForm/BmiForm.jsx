@@ -102,7 +102,7 @@ const BmiForm = ({ change }) => {
 				...state,
 				[name]: value,
 				date,
-				dateObject: calendarDate
+				dateObject: new Date(calendarDate)
 			});
 		}
 	};
@@ -128,7 +128,7 @@ const BmiForm = ({ change }) => {
 				...state,
 				[name]: value,
 				date,
-				dateObject: calendarDate
+				dateObject: new Date(calendarDate)
 			});
 		}
 	};
@@ -158,7 +158,7 @@ const BmiForm = ({ change }) => {
 							<div>
 								<h6 className='white-text'> Body mass index (BMI) Tracker tracks your BMI changes. </h6>
 							</div>
-						</Grid>	
+						</Grid>
 					</Grid>
 					<Grid item xs={12} sm={12}>
 						<div className='row center' style={{marginBottom:'-50px'}}>
@@ -167,7 +167,7 @@ const BmiForm = ({ change }) => {
 							<p>{transcript}</p>
 							{/*	Hide the above*/}
 
-						</div>	
+						</div>
 					</Grid>
 				</Grid>
 				
@@ -221,11 +221,12 @@ const BmiForm = ({ change }) => {
 						onClick={handleSubmit}
 					>
 						Calculate BMI
-					</button>	
+					</button>
 				</div>
 				</Grid>
 
-			</div>	
+
+			</div>
 			</div>
 		</>
 	);
