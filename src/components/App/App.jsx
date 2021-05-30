@@ -80,16 +80,6 @@ const App = () => {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
 
-        <Grid item xs={12} sm={12}>
-          <div className='row center'>
-            <h1 className='white-text'> BMI Tracker </h1>
-          </div>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <div className='row center'>
-            <h6 className='white-text'> BMI Tracker calculates the BMI value </h6>
-          </div>
-        </Grid>
         <section></section>
         <Grid item xs={12} sm={12}>
 
@@ -103,8 +93,8 @@ const App = () => {
         
       </Grid>
       <Grid ref={myRef} item xs={12} sm={12}>
-        <div className="center"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.date - a.date)[0].bmi : "-"}`
-        }</h1></div>
+        <div className="center"><h2>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.date - a.date)[0].bmi : "-"}`
+        }</h2></div>
       </Grid>
 
       <Grid item xs={12} sm={6}>
