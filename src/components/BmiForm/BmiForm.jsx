@@ -155,7 +155,7 @@ const BmiForm = ({ change }) => {
 		<>
 			<div className="container">
 			<div className="center">
-				<Grid container xs={12} sm={12} spacing={2}>
+				<Grid container spacing={2}>
 					<Grid item xs={12} sm={12}>
 						<Grid item xs={12} sm={12}>
 							<div className='row center'>
@@ -189,7 +189,7 @@ const BmiForm = ({ change }) => {
 					/>
 					</Grid>
 				</Grid>
-				<Grid container xs={12} sm={12} >
+				<Grid container  >
 					<Grid item xs={12} sm={6}>
 						<label htmlFor="weight">Weight (in kg)</label>
 						<input
@@ -200,7 +200,7 @@ const BmiForm = ({ change }) => {
 							value={state.weight}
 							onChange={handleChangeWeight}
 						/>
-						<p class="error">{weightError.errorMsg}</p>
+						<p className="error">{weightError.errorMsg}</p>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<label htmlFor="height">Height (in cm)</label>
@@ -212,7 +212,7 @@ const BmiForm = ({ change }) => {
 							value={state.height}
 							onChange={handleChangeHeight}
 						/>
-						<p class="error">{heightError.errorMsg}</p>
+						<p className="error">{heightError.errorMsg}</p>
 					</Grid>
 
 				</Grid>
