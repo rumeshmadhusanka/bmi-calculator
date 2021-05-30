@@ -151,7 +151,7 @@ const BmiForm = ({ change }) => {
 					<Grid item xs={12} sm={12}>
 						<Grid item xs={12} sm={12}>
 							<div className='row center'>
-								<h1 className='white-text' style={{marginBottom:'2px'}}> BMI Tracker </h1>
+								<h1 className='white-text' style={{marginBottom:'2px', marginTop: '60px'}}> BMI Tracker </h1>
 							</div>
 						</Grid>
 						<Grid item xs={12} sm={12}>
@@ -161,7 +161,7 @@ const BmiForm = ({ change }) => {
 						</Grid>
 					</Grid>
 					<Grid item xs={12} sm={12}>
-						<div className='row center' style={{marginBottom:'-50px'}}>
+						<div className='voice-button'>
 							<button className="calculate-btn" onClick={toggleListen}>Voice Button</button>
 							{/*//todo apply style, move to right upper corner*/}
 							<p>{transcript}</p>
@@ -170,9 +170,9 @@ const BmiForm = ({ change }) => {
 						</div>
 					</Grid>
 				</Grid>
-				
+
 				<Grid container xs={12} sm={12} >
-					
+
 					<Grid item xs={12} sm={6}>
 						<label htmlFor="weight">Weight (in kg)</label>
 						<input
@@ -196,8 +196,8 @@ const BmiForm = ({ change }) => {
 							onChange={handleChangeHeight}
 						/>
 						<p class="error">{heightError.errorMsg}</p>
-					</Grid>	
-						
+					</Grid>
+
 				</Grid>
 				<Grid item xs={12} sm={12}>
 					<div className='col m12 s12'>
@@ -209,9 +209,9 @@ const BmiForm = ({ change }) => {
 								maxDate={new Date()}
 							/>
 						</div>
-					</div>	
+					</div>
 				</Grid>
-				<Grid item xs={12} sm={12}>	
+				<Grid item xs={12} sm={12}>
 				<div style={{marginTop: '16px'}}>
 					<button
 						id="bmi-btn"
