@@ -7,7 +7,6 @@ import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
 import Select from 'react-select';
 
-
 const options = [
 	{ value: 'metric', label: 'Metric (kg/cm)' },
 	{ value: 'imperial', label: 'Imperial (lb/ft)' },
@@ -18,6 +17,7 @@ const initialValues = {
 	height: '',
 	date: ''
 }
+
 let speechRecognitionOn = false;
 const BmiForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
@@ -268,6 +268,7 @@ const BmiForm = ({ change }) => {
 						<div className='voice-button'>
 							<button className={getVoiceBtnClassName()} onClick={toggleListen}>Speech Assistant</button>
 							<p className={"speech-out"}>{transcript}</p>
+
 						</div>
 					</Grid>
 					<Grid item xs={4} sm={4} >
@@ -279,7 +280,6 @@ const BmiForm = ({ change }) => {
 							onChange={setUnit}
 							options={options}
 						/>
-					/>
 					</Grid>
 				</Grid>
 				<Grid container  >
@@ -332,7 +332,6 @@ const BmiForm = ({ change }) => {
 					>
 						Calculate BMI
 					</button>
-
 				</div>
 				</Grid>
 			</div>
