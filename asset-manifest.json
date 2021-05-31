@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/bmi-calculator/static/css/main.7a8007c8.chunk.css",
+    "main.js": "/bmi-calculator/static/js/main.a2642a19.chunk.js",
+    "main.js.map": "/bmi-calculator/static/js/main.a2642a19.chunk.js.map",
+    "runtime-main.js": "/bmi-calculator/static/js/runtime-main.2333af6b.js",
+    "runtime-main.js.map": "/bmi-calculator/static/js/runtime-main.2333af6b.js.map",
+    "xlsx.js": "/bmi-calculator/static/js/xlsx.2684ddd2.chunk.js",
+    "xlsx.js.map": "/bmi-calculator/static/js/xlsx.2684ddd2.chunk.js.map",
+    "static/css/3.4f10762c.chunk.css": "/bmi-calculator/static/css/3.4f10762c.chunk.css",
+    "static/js/3.3773d865.chunk.js": "/bmi-calculator/static/js/3.3773d865.chunk.js",
+    "static/js/3.3773d865.chunk.js.map": "/bmi-calculator/static/js/3.3773d865.chunk.js.map",
+    "static/js/4.81fc61bc.chunk.js": "/bmi-calculator/static/js/4.81fc61bc.chunk.js",
+    "static/js/4.81fc61bc.chunk.js.map": "/bmi-calculator/static/js/4.81fc61bc.chunk.js.map",
+    "static/js/5.ad64c16e.chunk.js": "/bmi-calculator/static/js/5.ad64c16e.chunk.js",
+    "static/js/5.ad64c16e.chunk.js.map": "/bmi-calculator/static/js/5.ad64c16e.chunk.js.map",
+    "static/js/6.1541a8c4.chunk.js": "/bmi-calculator/static/js/6.1541a8c4.chunk.js",
+    "static/js/6.1541a8c4.chunk.js.map": "/bmi-calculator/static/js/6.1541a8c4.chunk.js.map",
+    "index.html": "/bmi-calculator/index.html",
+    "static/css/3.4f10762c.chunk.css.map": "/bmi-calculator/static/css/3.4f10762c.chunk.css.map",
+    "static/css/main.7a8007c8.chunk.css.map": "/bmi-calculator/static/css/main.7a8007c8.chunk.css.map",
+    "static/js/3.3773d865.chunk.js.LICENSE.txt": "/bmi-calculator/static/js/3.3773d865.chunk.js.LICENSE.txt",
+    "static/js/5.ad64c16e.chunk.js.LICENSE.txt": "/bmi-calculator/static/js/5.ad64c16e.chunk.js.LICENSE.txt",
+    "static/js/6.1541a8c4.chunk.js.LICENSE.txt": "/bmi-calculator/static/js/6.1541a8c4.chunk.js.LICENSE.txt",
+    "static/media/BMI.088fd306.jpg": "/bmi-calculator/static/media/BMI.088fd306.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2333af6b.js",
+    "static/css/3.4f10762c.chunk.css",
+    "static/js/3.3773d865.chunk.js",
+    "static/css/main.7a8007c8.chunk.css",
+    "static/js/main.a2642a19.chunk.js"
+  ]
+}
