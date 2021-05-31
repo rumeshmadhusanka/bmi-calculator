@@ -85,7 +85,7 @@ const BmiForm = ({ change }) => {
 			SpeechRecognition.abortListening();
 			setOldTranscript("")
 			speechRecognitionOn = false;
-			setSpeechValue("Speech Recognition stopped");
+			setSpeechValue("Speech assistant stopped");
 		}
 		if (transcript.includes("reset")) {
 			setOldTranscript("")
