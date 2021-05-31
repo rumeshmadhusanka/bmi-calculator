@@ -5,7 +5,6 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
-import Select from 'react-select';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
