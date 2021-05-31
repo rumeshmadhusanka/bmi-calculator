@@ -276,8 +276,7 @@ const BmiForm = ({ change }) => {
 
 					</Grid>
 					<Grid item xs={4} sm={4}>
-						<Dropdown options={options} onChange={setUnit} value={unit} placeholder="Select an option" />;
-
+						<Dropdown options={options} onChange={setUnit} value={unit} placeholder="Select an option" />
 					</Grid>
 				</Grid>
 				<Grid container  >
