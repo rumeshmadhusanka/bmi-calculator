@@ -80,7 +80,7 @@ const BmiForm = ({ change }) => {
 		if (transcript === "" || transcript === oldTranscript) {
 			return;
 		}
-		if (transcript.includes("off") || transcript.includes("shut") || transcript.includes("kill")) {
+		if (transcript.includes("off") || transcript.includes("shut") || transcript.includes("kill")||transcript.includes("stop")) {
 			SpeechRecognition.abortListening();
 			setOldTranscript("")
 			speechRecognitionOn = false;
