@@ -5,7 +5,6 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Grid } from '@material-ui/core'
 import DatePicker from 'react-date-picker';
-import Select from 'react-select';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
@@ -277,8 +276,7 @@ const BmiForm = ({ change }) => {
 
 					</Grid>
 					<Grid item xs={4} sm={4}>
-						<Dropdown options={options} onChange={setUnit} value={unit} placeholder="Select an option" />;
-
+						<Dropdown options={options} onChange={setUnit} value={unit} placeholder="Select an option" />
 					</Grid>
 				</Grid>
 				<Grid container  >
