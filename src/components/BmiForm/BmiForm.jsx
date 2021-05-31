@@ -151,7 +151,7 @@ const BmiForm = ({ change }) => {
 			}else{
 				status = "extremely obese"
 			}
-			setSpeechValue("Your weight is "+heightTemp+". Your BMI is "+bmi+". According to your BMI, you are "+status);
+			setSpeechValue("Your height is "+heightTemp+". Your BMI is "+bmi+". According to your BMI, you are "+status);
 			resetTranscript();
 		}
 		setOldTranscript(transcript);
