@@ -67,6 +67,8 @@ const BmiForm = ({ change }) => {
 				'Content-Type': 'application/json'
 			}}).then(res=>res.json()).then(data=> {
 			if (data.country==="US"){
+				//imperial system
+				//change unit to imperial
 				setUnit({ value: 'imperial', label: 'Imperial (lb/ft)' })
 				console.log("Using imperial unit system");
 			}else{
@@ -80,7 +82,7 @@ const BmiForm = ({ change }) => {
 		if (transcript === "" || transcript === oldTranscript) {
 			return;
 		}
-		if (transcript.includes("off") || transcript.includes("shut") || transcript.includes("kill")) {
+		if (transcript.includes("off") || transcript.includes("shut") || transcript.includes("kill")||transcript.includes("stop")) {
 			SpeechRecognition.abortListening();
 			setOldTranscript("")
 			speechRecognitionOn = false;
@@ -98,6 +100,11 @@ const BmiForm = ({ change }) => {
 		if ((transcript.includes("kilo") || transcript.includes("kg")|| transcript.includes("grams"))) {
 			let weightTemp = 0;
 			weightTemp = transcript.replace(/[^0-9]/g, "");
+			if (weightTemp<25 || weightTemp>300){
+				setSpeechValue(weightTemp+" is an invalid weight. Please enter your weight again.");
+				resetTranscript();
+				return;
+			}
 			setState({
 				...state,
 				weight: weightTemp,
@@ -115,7 +122,12 @@ const BmiForm = ({ change }) => {
 		if ((transcript.includes("cm") || transcript.includes("centi") || transcript.includes("meter") ||  transcript.includes("CM"))) {
 			let heightTemp = 1;
 			heightTemp = transcript.replace(/[^0-9]/g, "");
-			//todo validate
+			// validate
+			if (heightTemp<50 || heightTemp>250){
+				setSpeechValue(heightTemp+" is an invalid height. Please enter your height again.");
+				resetTranscript();
+				return;
+			}
 			setState({
 				...state,
 				height : heightTemp,
@@ -126,9 +138,20 @@ const BmiForm = ({ change }) => {
 			let hinM = heightTemp/100;
 			bmi = state.weight / hinM**2;
 			bmi = bmi.toFixed(2)
-			setSpeechValue("Your weight is "+heightTemp+". Your BMI is "+bmi);
-
 			//todo categorize the output and read
+			let status = ""
+			if (bmi<18.5){
+				status = "underweight";
+			}else if (bmi<25){
+				status = "healthy";
+			}else if (bmi<29){
+				status = "overweight"
+			}else if (bmi<30){
+				status = "obese"
+			}else{
+				status = "extremely obese"
+			}
+			setSpeechValue("Your weight is "+heightTemp+". Your BMI is "+bmi+". According to your BMI, you are "+status);
 			resetTranscript();
 		}
 		setOldTranscript(transcript);
@@ -152,7 +175,7 @@ const BmiForm = ({ change }) => {
 		}
 		speechRecognitionOn = !speechRecognitionOn;
 		if (speechRecognitionOn) {
-			setSpeechValue("Speech assistant started... Please speak your weight to calculate your BMI");
+			setSpeechValue("Speech assistant started... Please speak your weight to calculate your B M I ");
 			return SpeechRecognition.startListening({ continuous: true })
 		} else {
 			speechRecognitionOn = false;
@@ -246,8 +269,7 @@ const BmiForm = ({ change }) => {
 					<Grid item xs={12} sm={12}>
 						<div className='voice-button'>
 							<button className={getVoiceBtnClassName()} onClick={toggleListen}>Speech Assistant</button>
-							<p>{transcript}</p>
-							{/*	Hide the above*/}
+							<p className={"speech-out"}>{transcript}</p>
 
 						</div>
 					</Grid>

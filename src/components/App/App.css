@@ -162,3 +162,6 @@ label {
 .date-align {
   text-align: left;
 }
+.speech-out {
+  visibility: hidden;
+}

@@ -56,12 +56,14 @@ export default function Chart({ labelData = [], bmiData = [] }) {
         createRange(valueAxis, 0, 18.5, am4core.color("#b4dd1e"));
         createRange(valueAxis, 18.5, 25, am4core.color("#3BCC61"));
         createRange(valueAxis, 25, 30, am4core.color("#f6d32b"));
-        createRange(valueAxis, 30, 100, am4core.color("#fb7116"));
+        createRange(valueAxis, 30, 35, am4core.color("#fb7116"));
+        createRange(valueAxis, 35, 100, am4core.color("#EC1F26"));
 
         createRangeLabel(valueAxis, 18.5, 'Underweight', 'top')
         createRangeLabel(valueAxis, 25, 'Healthy', 'top')
         createRangeLabel(valueAxis, 30, 'Overweight', 'top')
-        createRangeLabel(valueAxis, 30, 'Obesity', 'bottom')
+        createRangeLabel(valueAxis, 30, 'Obase', 'bottom')
+        createRangeLabel(valueAxis, 35, 'Extremely Obase', 'bottom')
         // createRange(valueAxis, 80, 100, am4core.color("#"));
 
         return function cleanup() {
@@ -85,7 +87,6 @@ export default function Chart({ labelData = [], bmiData = [] }) {
         range.value = point;
         range.label.text = label;
         range.label.fill = am4core.color("#111111");
-        // range.label.stroke = am4core.color("#000000");
         range.label.inside = true;
         range.label.verticalCenter = position;
     }

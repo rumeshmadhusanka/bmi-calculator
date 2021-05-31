@@ -85,8 +85,7 @@ const App = () => {
 
       </Grid>
       <Grid ref={myRef} item xs={12} sm={12}>
-        <div className="center white-text"><h1>{`Your last BMI is: ${state && state.length > 0 ? state.sort((a, b) => b.dateObject - a.dateObject)[0].bmi : "-"}`
-        }</h1></div>
+        <div className="center white-text"><h1>{state && state.length > 0 ? `Your last BMI is: ${state.sort((a, b) => b.dateObject - a.dateObject)[0].bmi}`  : ""}</h1></div>
       </Grid>
 
       <Grid item xs={12} sm={6}>
