@@ -2,6 +2,7 @@
   "name": "bmical",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rumeshmadhusanka.github.io/bmi-calculator",
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.18",
     "@material-ui/core": "^4.11.4",
